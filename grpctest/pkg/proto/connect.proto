@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package proto;
+
+option optimize_for = SPEED;
+option go_package = "connect";
+
+//import "gogoproto/gogo.proto";
+
+// The service definition.
+service DataService {
+  rpc Data (DataRequest) returns (stream DataMessage) {}
+}
+
+// The Data request message
+message DataRequest {
+  int32 messages = 1;
+  int32 units = 2;
+  int32 bufferSize = 3;
+}
+
+message DataMessage {
+  repeated DataUnit units = 1;
+}
+
+message DataUnit {
+  bytes buffer = 1;
+}
